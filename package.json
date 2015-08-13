@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
+    "node-rest-client": "^1.5.1",
     "restler": "^3.3.0"
   }
 }
