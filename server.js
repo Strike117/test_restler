@@ -8,14 +8,14 @@ var app = express();
 var Client = require('node-rest-client').Client;
 
 
-var options_proxy={
-        proxy:{
-            host:"sacproxy.verizon.com",
-            port:80
-        }
-    },
+var options_proxy = {
+    proxy: {
+      host: "sacproxy.verizon.com",
+      port: 80
+    }
+  },
 
-client = new Client(options_proxy);
+  client = new Client(options_proxy);
 
 // direct way
 
@@ -60,6 +60,27 @@ app.get('/client-rest', function(req, res) {
     //console.log(data);
     // raw response
     console.log(response);
+    res.send(data);
+  });
+});
+app.get('/client-post', function(req, res) {
+  console.log('req.query', req.query);
+  var args = {
+    data: {
+      data: '{"type":"INFO", "body":"time = Thu Aug 13 2015 15:43:58 GMT-0500 (SA Pacific Standard Time)","title":"test"}',
+      user: 'testuser',
+      portal: 'TestProtal',
+      action: 'notificationPopup'
+    },
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  client.post("http://204.151.184.215:8000/notify", args, function(data, response) {
+    // parsed response body as js object
+    //console.log(data);
+    // raw response
+    console.log(data);
     res.send(data);
   });
 });
